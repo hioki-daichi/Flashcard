@@ -20,4 +20,7 @@ main = do
   runSpock 8080 (spock spockCfg app)
 
 app :: SpockM () MySession MyAppState ()
-app = get "ping" $ text "pong"
+app =
+  get "ping" $ do
+    setHeader "Access-Control-Allow-Origin" "http://localhost:3000"
+    text "pong"

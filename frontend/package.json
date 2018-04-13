@@ -1,0 +1,36 @@
+{
+  "name": "flashcard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "ace-css": "^1.1.0",
+    "css-loader": "^0.28.11",
+    "elm-webpack-loader": "^4.5.0",
+    "file-loader": "^0.11.2",
+    "font-awesome": "^4.7.0",
+    "style-loader": "^0.20.3",
+    "url-loader": "^0.6.2",
+    "webpack": "^1.15.0",
+    "webpack-dev-middleware": "^1.12.2",
+    "webpack-dev-server": "^1.16.5"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.10.0"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --port 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hioki-daichi/flashcard.git"
+  },
+  "author": "Daichi Hioki",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/hioki-daichi/flashcard/issues"
+  },
+  "homepage": "https://github.com/hioki-daichi/flashcard"
+}
