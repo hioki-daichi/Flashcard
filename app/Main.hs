@@ -2,10 +2,13 @@
 
 module Main where
 
+import           Control.Monad.IO.Class (liftIO)
+import           Data.IORef
+import           Data.Monoid            ((<>))
+import           Data.Text              as T
+import           Data.Time.Clock
 import           Web.Spock
 import           Web.Spock.Config
-
-import           Data.IORef
 
 data MySession =
   EmptySession
@@ -23,4 +26,5 @@ app :: SpockM () MySession MyAppState ()
 app =
   get "ping" $ do
     setHeader "Access-Control-Allow-Origin" "http://localhost:3000"
-    text "pong"
+    currentTime <- liftIO getCurrentTime
+    text $ "pong at " <> T.pack (show currentTime)
