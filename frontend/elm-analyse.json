@@ -1,0 +1,6 @@
+{
+  "checks" : {
+    "DebugLog" : false,
+    "ExposeAll" : false
+  }
+}
