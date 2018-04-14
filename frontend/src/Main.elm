@@ -3,6 +3,7 @@ module Main exposing (..)
 import Html exposing (Html, div, text, program, button)
 import Html.Events exposing (onClick)
 import Http
+import Json.Decode
 
 
 type alias Model =
@@ -16,7 +17,7 @@ init =
 
 type Msg
     = Ping
-    | OnPing (Result Http.Error String)
+    | OnPing (Result Http.Error Health)
 
 
 view : Model -> Html Msg
@@ -32,10 +33,10 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Ping ->
-            ( model, Http.getString "http://localhost:8080/ping" |> Http.send OnPing )
+            ( model, Http.get "http://localhost:8080/ping" healthDecoder |> Http.send OnPing )
 
-        OnPing (Ok string) ->
-            ( string, Cmd.none )
+        OnPing (Ok health) ->
+            ( health.time, Cmd.none )
 
         OnPing (Err err) ->
             let
@@ -58,3 +59,13 @@ main =
         , update = update
         , subscriptions = subscriptions
         }
+
+
+type alias Health =
+    { time : String
+    }
+
+
+healthDecoder : Json.Decode.Decoder Health
+healthDecoder =
+    Json.Decode.map Health (Json.Decode.field "time" Json.Decode.string)
