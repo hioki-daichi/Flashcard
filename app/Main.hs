@@ -24,5 +24,5 @@ app :: SpockM () MySession MyAppState ()
 app =
   get "ping" $ do
     setHeader "Access-Control-Allow-Origin" "http://localhost:3000"
-    health <- liftIO getHealth
+    health <- liftIO touchHealth
     json health
