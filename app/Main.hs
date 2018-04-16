@@ -1,20 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell   #-}
 
 module Main where
 
 import           Control.Monad.IO.Class (liftIO)
-import           Data.Aeson.TH
 import           Data.IORef
-import           Data.Time.Clock
+import           Model.Health
 import           Web.Spock
 import           Web.Spock.Config
-
-newtype Health = Health
-  { time :: UTCTime
-  } deriving (Show)
-
-deriveJSON defaultOptions ''Health
 
 data MySession =
   EmptySession
@@ -32,5 +24,5 @@ app :: SpockM () MySession MyAppState ()
 app =
   get "ping" $ do
     setHeader "Access-Control-Allow-Origin" "http://localhost:3000"
-    currentTime <- liftIO getCurrentTime
-    json (Health currentTime)
+    health <- liftIO touchHealth
+    json health
