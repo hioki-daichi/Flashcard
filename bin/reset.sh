@@ -1,5 +1,4 @@
 #!/bin/sh
 
-rm flashcard.db
-sqlite3 flashcard.db < data/schema.sql
+. ./bin/reset_db.sh
 pushd ./frontend/ && npm install && popd
