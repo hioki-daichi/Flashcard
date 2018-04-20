@@ -1,6 +1,5 @@
 module Healths.Update exposing (update)
 
-import Healths.Models exposing (Health)
 import Healths.Messages exposing (Msg(..))
 import Healths.Commands exposing (ping)
 import Models exposing (Model)

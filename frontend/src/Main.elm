@@ -1,15 +1,16 @@
 module Main exposing (main)
 
 import Html exposing (program)
-import Healths.Messages exposing (Msg)
-import Healths.Update exposing (update)
-import Healths.View exposing (view)
+import Healths.Commands exposing (ping)
 import Models exposing (Model, initialModel)
+import Messages exposing (Msg(..))
+import Update exposing (update)
+import View exposing (view)
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialModel, Cmd.none )
+    ( initialModel, Cmd.map HealthsMsg ping )
 
 
 subscriptions : Model -> Sub Msg
