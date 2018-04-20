@@ -2,7 +2,7 @@ module DataSource
   ( connect
   ) where
 
-import           Database.HDBC.Sqlite3 (Connection, connectSqlite3)
+import           Database.HDBC.PostgreSQL (Connection, connectPostgreSQL)
 
 connect :: IO Connection
-connect = connectSqlite3 "flashcard.db"
+connect = connectPostgreSQL "user=postgres host=localhost port=15432 dbname=flashcard_development"
