@@ -1,2 +1,2 @@
-server: stack build :flashcard && stack exec flashcard
-client: cd frontend && npm run dev
+server: ./bin/server.sh
+client: ./bin/client.sh
