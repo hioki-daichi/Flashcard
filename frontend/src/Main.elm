@@ -1,6 +1,7 @@
 module Main exposing (main)
 
-import Html exposing (program)
+import Navigation
+import Routing
 import Healths.Commands exposing (ping)
 import Models exposing (Model, initialModel)
 import Messages exposing (Msg(..))
@@ -8,9 +9,13 @@ import Update exposing (update)
 import View exposing (view)
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( initialModel, Cmd.map HealthsMsg ping )
+init : Navigation.Location -> ( Model, Cmd Msg )
+init location =
+    let
+        currentRoute =
+            Routing.parseLocation location
+    in
+        ( initialModel currentRoute, Cmd.map HealthsMsg ping )
 
 
 subscriptions : Model -> Sub Msg
@@ -20,7 +25,7 @@ subscriptions _ =
 
 main : Program Never Model Msg
 main =
-    program
+    Navigation.program OnLocationChange
         { init = init
         , view = view
         , update = update

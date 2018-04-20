@@ -1,12 +1,17 @@
 module Models exposing (Model, initialModel)
 
 import Healths.Models exposing (Health)
+import Routing
 
 
 type alias Model =
-    { health : Health }
+    { route : Routing.Route
+    , health : Health
+    }
 
 
-initialModel : Model
-initialModel =
-    { health = Health 0 "" }
+initialModel : Routing.Route -> Model
+initialModel route =
+    { route = route
+    , health = Health 0 ""
+    }

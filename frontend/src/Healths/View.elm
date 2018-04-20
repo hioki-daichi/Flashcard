@@ -8,8 +8,4 @@ import Healths.Models exposing (Health)
 
 view : Health -> Html Msg
 view health =
-    div
-        []
-        [ button [ onClick Ping ] [ text "Ping" ]
-        , div [] [ text health.time ]
-        ]
+    div [] [ text health.time ]
