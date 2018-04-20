@@ -1,7 +1,9 @@
 module Messages exposing (Msg(..))
 
+import Navigation
 import Healths.Messages
 
 
 type Msg
-    = HealthsMsg Healths.Messages.Msg
+    = OnLocationChange Navigation.Location
+    | HealthsMsg Healths.Messages.Msg
