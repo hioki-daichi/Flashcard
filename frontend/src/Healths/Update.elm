@@ -1,8 +1,9 @@
 module Healths.Update exposing (update)
 
-import Healths.Models exposing (Model, Health)
+import Healths.Models exposing (Health)
 import Healths.Messages exposing (Msg(..))
 import Healths.Commands exposing (ping)
+import Models exposing (Model)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -12,7 +13,7 @@ update msg model =
             ( model, ping )
 
         OnPing (Ok health) ->
-            ( health.time, Cmd.none )
+            ( { model | health = health }, Cmd.none )
 
         OnPing (Err err) ->
             let

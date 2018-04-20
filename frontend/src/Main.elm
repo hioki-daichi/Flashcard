@@ -1,10 +1,10 @@
 module Main exposing (main)
 
 import Html exposing (program)
-import Healths.Models exposing (Model, initialModel)
 import Healths.Messages exposing (Msg)
 import Healths.Update exposing (update)
 import Healths.View exposing (view)
+import Models exposing (Model, initialModel)
 
 
 init : ( Model, Cmd Msg )
