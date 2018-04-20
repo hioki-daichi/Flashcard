@@ -1,4 +1,4 @@
-module Model exposing (Model, Health, initialModel)
+module Models exposing (Model, Health, initialModel)
 
 
 type alias Model =

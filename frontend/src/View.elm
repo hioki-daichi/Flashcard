@@ -2,8 +2,8 @@ module View exposing (view)
 
 import Html exposing (Html, button, text, div)
 import Html.Events exposing (onClick)
-import Model exposing (Model)
-import Message exposing (Msg(..))
+import Models exposing (Model)
+import Messages exposing (Msg(..))
 
 
 view : Model -> Html Msg
