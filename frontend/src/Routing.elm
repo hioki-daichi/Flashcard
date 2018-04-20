@@ -12,7 +12,7 @@ type Route
 matchers : UrlParser.Parser (Route -> a) a
 matchers =
     UrlParser.oneOf
-        [ UrlParser.map HealthRoute UrlParser.top
+        [ UrlParser.map HealthRoute (UrlParser.s "ping")
         ]
 
 
