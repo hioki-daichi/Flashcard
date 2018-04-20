@@ -1,7 +1,8 @@
 module View exposing (view)
 
 import Routing exposing (Route(..))
-import Html exposing (Html, div, text)
+import Html exposing (Html, div, text, a)
+import Html.Events exposing (onClick)
 import Models exposing (Model)
 import Messages exposing (Msg(..))
 import Healths.View
@@ -15,11 +16,21 @@ view model =
 page : Model -> Html Msg
 page model =
     case model.route of
+        WelcomeRoute ->
+            welcomeView
+
         HealthRoute ->
             healthView model
 
         NotFoundRoute ->
             notFoundView
+
+
+welcomeView : Html Msg
+welcomeView =
+    div []
+        [ a [ onClick ShowPing ] [ text "ping" ]
+        ]
 
 
 healthView : Model -> Html Msg

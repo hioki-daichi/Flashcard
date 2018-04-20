@@ -1,5 +1,6 @@
 module Update exposing (update)
 
+import Navigation
 import Routing
 import Models exposing (Model)
 import Messages exposing (Msg(..))
@@ -15,6 +16,9 @@ update msg model =
                     Routing.parseLocation location
             in
                 ( { model | route = route }, Cmd.none )
+
+        ShowPing ->
+            ( model, Navigation.newUrl "#ping" )
 
         HealthsMsg subMsg ->
             let

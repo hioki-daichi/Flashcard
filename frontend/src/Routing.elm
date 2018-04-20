@@ -5,14 +5,16 @@ import UrlParser
 
 
 type Route
-    = HealthRoute
+    = WelcomeRoute
+    | HealthRoute
     | NotFoundRoute
 
 
 matchers : UrlParser.Parser (Route -> a) a
 matchers =
     UrlParser.oneOf
-        [ UrlParser.map HealthRoute (UrlParser.s "ping")
+        [ UrlParser.map WelcomeRoute UrlParser.top
+        , UrlParser.map HealthRoute (UrlParser.s "ping")
         ]
 
 
