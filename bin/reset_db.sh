@@ -1,4 +1,4 @@
 #!/bin/sh
 
-rm flashcard.db
-sqlite3 flashcard.db < data/schema.sql
+psql -U postgres -h localhost -p 15432 -d flashcard_development -c 'drop table health'
+psql -U postgres -h localhost -p 15432 -d flashcard_development < data/schema.sql

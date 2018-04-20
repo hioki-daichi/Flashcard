@@ -21,7 +21,7 @@ library
   build-depends:    base >= 4.7 && < 5
                   , HDBC
                   , HDBC-session
-                  , HDBC-sqlite3
+                  , HDBC-postgresql
                   , relational-query
                   , relational-query-HDBC
                   , sql-words

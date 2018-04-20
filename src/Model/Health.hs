@@ -36,12 +36,12 @@ getHealthQuery = relationalQuery' (relation q) [LIMIT, word "1"]
       desc $ h ! E.time'
       return h
 
-updateHealth :: Int32 -> IO Integer
+updateHealth :: Int64 -> IO Integer
 updateHealth healthId = do
   utcTime <- currentUtcTime
   withConnectionCommit connect $ \conn -> runUpdate conn updateHealthQuery (utcTime, healthId)
 
-updateHealthQuery :: Update (TM.LocalTime, Int32)
+updateHealthQuery :: Update (TM.LocalTime, Int64)
 updateHealthQuery =
   derivedUpdate $ \proj -> do
     (phTime, ()) <- placeholder (\ph -> E.time' <-# ph)

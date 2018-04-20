@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sqlite3 flashcard.db
+psql -U postgres -h localhost -p 15432 -d flashcard_development
