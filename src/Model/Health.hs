@@ -29,7 +29,7 @@ getHealth = do
   return $ head healths
 
 getHealthQuery :: Query () E.Health
-getHealthQuery = relationalQuery' (relation q) [LIMIT, word (show "1")]
+getHealthQuery = relationalQuery' (relation q) [LIMIT, word "1"]
   where
     q = do
       h <- query E.health
