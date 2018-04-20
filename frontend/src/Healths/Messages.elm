@@ -1,7 +1,7 @@
-module Messages exposing (Msg(..))
+module Healths.Messages exposing (Msg(..))
 
 import Http
-import Models exposing (Health)
+import Healths.Models exposing (Health)
 
 
 type Msg

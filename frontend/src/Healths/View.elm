@@ -1,9 +1,9 @@
-module View exposing (view)
+module Healths.View exposing (view)
 
 import Html exposing (Html, button, text, div)
 import Html.Events exposing (onClick)
-import Models exposing (Model)
-import Messages exposing (Msg(..))
+import Healths.Models exposing (Model)
+import Healths.Messages exposing (Msg(..))
 
 
 view : Model -> Html Msg

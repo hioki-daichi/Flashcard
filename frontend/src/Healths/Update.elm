@@ -1,9 +1,9 @@
-module Update exposing (update)
+module Healths.Update exposing (update)
 
 import Http
 import Json.Decode
-import Models exposing (Model, Health)
-import Messages exposing (Msg(..))
+import Healths.Models exposing (Model, Health)
+import Healths.Messages exposing (Msg(..))
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
