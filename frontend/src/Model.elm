@@ -6,7 +6,8 @@ type alias Model =
 
 
 type alias Health =
-    { time : String
+    { id : Int
+    , time : String
     }
 
 

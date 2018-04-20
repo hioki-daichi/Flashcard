@@ -25,4 +25,4 @@ update msg model =
 
 healthDecoder : Json.Decode.Decoder Health
 healthDecoder =
-    Json.Decode.map Health (Json.Decode.field "time" Json.Decode.string)
+    Json.Decode.map2 Health (Json.Decode.field "id" Json.Decode.int) (Json.Decode.field "time" Json.Decode.string)
