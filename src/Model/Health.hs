@@ -8,8 +8,8 @@ import qualified Data.Time.Clock           as TM
 import qualified Data.Time.LocalTime       as TM
 import           Database.HDBC.Record
 import           Database.HDBC.Session     (withConnectionCommit)
-import           Database.HDBC.Sqlite3
 import           Database.Relational.Query as HRR
+import           DataSource
 import qualified Entity.Health             as E
 import           GHC.Int
 import           Language.SQL.Keyword
@@ -47,9 +47,6 @@ updateHealthQuery =
     (phTime, ()) <- placeholder (\ph -> E.time' <-# ph)
     (phId, ()) <- placeholder (\ph -> wheres $ proj ! E.id' HRR..=. ph)
     return $ phTime >< phId
-
-connect :: IO Connection
-connect = connectSqlite3 "flashcard.db"
 
 currentUtcTime :: IO TM.LocalTime
 currentUtcTime = TM.utcToLocalTime TM.utc <$> TM.getCurrentTime

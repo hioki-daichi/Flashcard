@@ -15,6 +15,7 @@ library
   hs-source-dirs:   src
   exposed-modules:  Entity.Health
                   , Model.Health
+                  , DataSource
   ghc-options:      -Wall
   default-language: Haskell2010
   build-depends:    base >= 4.7 && < 5
