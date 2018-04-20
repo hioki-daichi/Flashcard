@@ -29,7 +29,7 @@ page model =
 welcomeView : Html Msg
 welcomeView =
     div []
-        [ a [ onClick ShowPing ] [ text "ping" ]
+        [ a [ onClick ShowHealth ] [ text "Check Health" ]
         ]
 
 

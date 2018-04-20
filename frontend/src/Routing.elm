@@ -14,7 +14,7 @@ matchers : UrlParser.Parser (Route -> a) a
 matchers =
     UrlParser.oneOf
         [ UrlParser.map WelcomeRoute UrlParser.top
-        , UrlParser.map HealthRoute (UrlParser.s "ping")
+        , UrlParser.map HealthRoute (UrlParser.s "health")
         ]
 
 

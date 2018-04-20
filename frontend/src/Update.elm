@@ -17,8 +17,8 @@ update msg model =
             in
                 ( { model | route = route }, Cmd.none )
 
-        ShowPing ->
-            ( model, Navigation.newUrl "#ping" )
+        ShowHealth ->
+            ( model, Navigation.newUrl "#health" )
 
         HealthsMsg subMsg ->
             let
