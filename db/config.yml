@@ -1,0 +1,8 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: flashcard_development
+  username: postgres
+  host: localhost
+  port: 15432
