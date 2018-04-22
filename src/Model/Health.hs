@@ -14,25 +14,25 @@ import qualified Entity.Health             as E
 import           GHC.Int
 import           Language.SQL.Keyword
 
-deriveJSON defaultOptions ''E.Health
+deriveJSON defaultOptions ''E.Healths
 
-touchHealth :: IO E.Health
+touchHealth :: IO E.Healths
 touchHealth = do
   health <- getHealth
   _ <- updateHealth (E.id health)
   getHealth
 
-getHealth :: IO E.Health
+getHealth :: IO E.Healths
 getHealth = do
   conn <- connect
   healths <- runQuery' conn getHealthQuery ()
   return $ head healths
 
-getHealthQuery :: Query () E.Health
+getHealthQuery :: Query () E.Healths
 getHealthQuery = relationalQuery' (relation q) [LIMIT, word "1"]
   where
     q = do
-      h <- query E.health
+      h <- query E.healths
       desc $ h ! E.time'
       return h
 
