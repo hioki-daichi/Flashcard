@@ -27,3 +27,8 @@ cabal.project.local
 # End of https://www.gitignore.io/api/haskell
 
 *.db
+
+### Ruby ###
+
+# Ignore bundler config.
+/.bundle
