@@ -14,6 +14,9 @@ cabal-version:      >=1.10
 library
   hs-source-dirs:   src
   exposed-modules:  Entity.Health
+                  , Entity.User
+                  , Entity.Book
+                  , Entity.Page
                   , Model.Health
                   , Web.Flashcard
                   , DataSource
