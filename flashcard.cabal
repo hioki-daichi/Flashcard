@@ -15,10 +15,12 @@ library
   hs-source-dirs:   src
   exposed-modules:  Entity.Health
                   , Model.Health
+                  , Web.Flashcard
                   , DataSource
   ghc-options:      -Wall
   default-language: Haskell2010
   build-depends:    base >= 4.7 && < 5
+                  , Spock
                   , HDBC
                   , HDBC-session
                   , HDBC-postgresql
@@ -35,5 +37,3 @@ executable flashcard
   default-language: Haskell2010
   build-depends:    base >= 4.7 && < 5
                   , flashcard
-                  , Spock
-                  , text
