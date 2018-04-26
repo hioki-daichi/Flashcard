@@ -19,6 +19,7 @@ library
                   , Entity.Page
                   , Model.Health
                   , Model.Book
+                  , Model.Page
                   , Web.Flashcard
                   , DataSource
   ghc-options:      -Wall
