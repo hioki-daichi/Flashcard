@@ -6,5 +6,4 @@ import Healths.Messages
 
 type Msg
     = OnLocationChange Navigation.Location
-    | ShowHealth
     | HealthsMsg Healths.Messages.Msg

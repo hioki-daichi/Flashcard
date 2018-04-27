@@ -5,6 +5,7 @@ import Html exposing (Html, div, text, a)
 import Html.Events exposing (onClick)
 import Models exposing (Model)
 import Messages exposing (Msg(..))
+import Healths.Messages
 import Healths.View
 
 
@@ -29,7 +30,7 @@ page model =
 welcomeView : Html Msg
 welcomeView =
     div []
-        [ a [ onClick ShowHealth ] [ text "Check Health" ]
+        [ a [ onClick (HealthsMsg Healths.Messages.ShowHealth) ] [ text "Check Health" ]
         ]
 
 
