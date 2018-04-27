@@ -14,8 +14,19 @@ init location =
     let
         currentRoute =
             Routing.parseLocation location
+
+        cmd =
+            case currentRoute of
+                Routing.WelcomeRoute ->
+                    Cmd.none
+
+                Routing.HealthRoute ->
+                    Cmd.map HealthsMsg ping
+
+                Routing.NotFoundRoute ->
+                    Cmd.none
     in
-        ( initialModel currentRoute, Cmd.map HealthsMsg ping )
+        ( initialModel currentRoute, cmd )
 
 
 subscriptions : Model -> Sub Msg
