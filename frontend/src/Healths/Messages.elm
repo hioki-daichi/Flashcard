@@ -5,5 +5,4 @@ import Healths.Models exposing (Health)
 
 
 type Msg
-    = Ping
-    | OnPing (Result Http.Error Health)
+    = OnPing (Result Http.Error Health)
