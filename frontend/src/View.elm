@@ -9,6 +9,7 @@ import Healths.Messages
 import Healths.View
 import Books.Messages
 import Books.List
+import Books.Detail
 
 
 view : Model -> Html Msg
@@ -24,6 +25,9 @@ page model =
 
         BooksRoute ->
             booksView model
+
+        BookRoute bookId ->
+            bookView model bookId
 
         HealthRoute ->
             healthView model
@@ -45,6 +49,11 @@ welcomeView =
 booksView : Model -> Html Msg
 booksView model =
     div [] [ Html.map BooksMsg (Books.List.view model.books) ]
+
+
+bookView : Model -> Int -> Html Msg
+bookView model bookId =
+    div [] [ Html.map BooksMsg (Books.Detail.view model.pages bookId) ]
 
 
 healthView : Model -> Html Msg

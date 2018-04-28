@@ -1,6 +1,7 @@
 module Books.List exposing (view)
 
-import Html exposing (Html, div, text, ul, li)
+import Html exposing (Html, div, text, ul, li, a)
+import Html.Events exposing (onClick)
 import Books.Models exposing (Book)
 import Books.Messages exposing (Msg(..))
 
@@ -12,4 +13,4 @@ view books =
 
 bookRow : Book -> Html Msg
 bookRow book =
-    li [] [ text book.title ]
+    li [] [ a [ onClick (ShowBook book.id) ] [ text book.title ] ]
