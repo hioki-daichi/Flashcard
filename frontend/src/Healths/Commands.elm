@@ -1,4 +1,4 @@
-module Healths.Commands exposing (..)
+module Healths.Commands exposing (ping)
 
 import Http
 import Json.Decode
