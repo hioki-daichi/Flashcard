@@ -7,6 +7,8 @@ import Models exposing (Model)
 import Messages exposing (Msg(..))
 import Healths.Messages
 import Healths.View
+import Books.Messages
+import Books.List
 
 
 view : Model -> Html Msg
@@ -20,6 +22,9 @@ page model =
         WelcomeRoute ->
             welcomeView
 
+        BooksRoute ->
+            booksView model
+
         HealthRoute ->
             healthView model
 
@@ -32,8 +37,14 @@ welcomeView =
     div []
         [ ul []
             [ li [] [ a [ onClick (HealthsMsg Healths.Messages.ShowHealth) ] [ text "Health" ] ]
+            , li [] [ a [ onClick (BooksMsg Books.Messages.ShowBooks) ] [ text "Books" ] ]
             ]
         ]
+
+
+booksView : Model -> Html Msg
+booksView model =
+    div [] [ Html.map BooksMsg (Books.List.view model.books) ]
 
 
 healthView : Model -> Html Msg

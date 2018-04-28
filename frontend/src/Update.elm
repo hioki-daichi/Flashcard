@@ -4,6 +4,7 @@ import Routing
 import Models exposing (Model)
 import Messages exposing (Msg(..))
 import Healths.Update
+import Books.Update
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -22,3 +23,10 @@ update msg model =
                     Healths.Update.update subMsg model
             in
                 ( updatedModel, Cmd.map HealthsMsg cmd )
+
+        BooksMsg subMsg ->
+            let
+                ( updatedModel, cmd ) =
+                    Books.Update.update subMsg model
+            in
+                ( updatedModel, Cmd.map BooksMsg cmd )
