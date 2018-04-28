@@ -1,7 +1,7 @@
 module Routing exposing (Route(..), parseLocation)
 
 import Navigation exposing (Location)
-import UrlParser
+import UrlParser exposing (parseHash, Parser, oneOf, map, top, s)
 
 
 type Route
@@ -10,17 +10,17 @@ type Route
     | NotFoundRoute
 
 
-matchers : UrlParser.Parser (Route -> a) a
+matchers : Parser (Route -> a) a
 matchers =
-    UrlParser.oneOf
-        [ UrlParser.map WelcomeRoute UrlParser.top
-        , UrlParser.map HealthRoute (UrlParser.s "health")
+    oneOf
+        [ map WelcomeRoute top
+        , map HealthRoute (s "health")
         ]
 
 
 parseLocation : Location -> Route
 parseLocation location =
-    case UrlParser.parseHash matchers location of
+    case parseHash matchers location of
         Just route ->
             route
 
