@@ -1,7 +1,7 @@
 module View exposing (view)
 
 import Routing exposing (Route(..))
-import Html exposing (Html, div, text, a)
+import Html exposing (Html, div, text, a, ul, li)
 import Html.Events exposing (onClick)
 import Models exposing (Model)
 import Messages exposing (Msg(..))
@@ -30,7 +30,9 @@ page model =
 welcomeView : Html Msg
 welcomeView =
     div []
-        [ a [ onClick (HealthsMsg Healths.Messages.ShowHealth) ] [ text "Check Health" ]
+        [ ul []
+            [ li [] [ a [ onClick (HealthsMsg Healths.Messages.ShowHealth) ] [ text "Health" ] ]
+            ]
         ]
 
 
