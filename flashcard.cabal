@@ -14,13 +14,20 @@ cabal-version:      >=1.10
 library
   hs-source-dirs:   src
   exposed-modules:  Entity.Health
+                  , Entity.User
+                  , Entity.Book
+                  , Entity.Page
                   , Model.Health
+                  , Model.Book
+                  , Model.Page
                   , Web.Flashcard
                   , DataSource
   ghc-options:      -Wall
   default-language: Haskell2010
   build-depends:    base >= 4.7 && < 5
+                  , text
                   , Spock
+                  , http-types
                   , HDBC
                   , HDBC-session
                   , HDBC-postgresql

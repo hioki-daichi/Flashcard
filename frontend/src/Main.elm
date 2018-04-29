@@ -3,6 +3,7 @@ module Main exposing (main)
 import Navigation
 import Routing
 import Healths.Commands exposing (ping)
+import Books.Commands exposing (fetchBooks, fetchPagesByBookId)
 import Models exposing (Model, initialModel)
 import Messages exposing (Msg(..))
 import Update exposing (update)
@@ -19,6 +20,12 @@ init location =
             case currentRoute of
                 Routing.WelcomeRoute ->
                     Cmd.none
+
+                Routing.BooksRoute ->
+                    Cmd.map BooksMsg fetchBooks
+
+                Routing.BookRoute bookId ->
+                    Cmd.map BooksMsg (fetchPagesByBookId bookId)
 
                 Routing.HealthRoute ->
                     Cmd.map HealthsMsg ping
