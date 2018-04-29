@@ -4,11 +4,12 @@ import Http
 import Json.Decode
 import Healths.Models exposing (Health)
 import Healths.Messages exposing (Msg(..))
+import Util exposing (baseUrl)
 
 
 ping : Cmd Msg
 ping =
-    Http.get "http://localhost:8080/ping" healthDecoder |> Http.send OnPing
+    Http.get (baseUrl ++ "/ping") healthDecoder |> Http.send OnPing
 
 
 healthDecoder : Json.Decode.Decoder Health
