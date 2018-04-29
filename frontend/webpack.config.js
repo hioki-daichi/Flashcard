@@ -1,6 +1,8 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
+
   entry: {
     app: [
       './src/index.js',
@@ -13,7 +15,7 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(css|scss)$/,
         loaders: [
@@ -24,12 +26,12 @@ module.exports = {
       {
         test: /\.html$/,
         exclude: /node_modules/,
-        loader: 'file?name=[name].[ext]',
+        loader: 'file-loader?name=[name].[ext]',
       },
       {
         test: /\.elm$/,
         exclude: [/elm-stuff/, /node_modules/],
-        loader: 'elm-webpack?verbose=true&warn=true',
+        loader: 'elm-webpack-loader?verbose=true&warn=true',
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
