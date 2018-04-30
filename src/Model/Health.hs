@@ -1,18 +1,21 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Model.Health where
+module Model.Health
+  ( touchHealth
+  ) where
 
-import           Data.Aeson.TH
-import qualified Data.Time.Clock           as TM
-import qualified Data.Time.LocalTime       as TM
-import           Database.HDBC.Record
+import           Data.Aeson.TH             (defaultOptions, deriveJSON)
+import qualified Data.Time.Clock           as TM (getCurrentTime)
+import qualified Data.Time.LocalTime       as TM (LocalTime, utc, utcToLocalTime)
+import           Database.HDBC.Record      (runQuery', runUpdate)
 import           Database.HDBC.Session     (withConnectionCommit)
-import           Database.Relational.Query as HRR
-import           DataSource
-import qualified Entity.Health             as E
-import           GHC.Int
-import           Language.SQL.Keyword
+import           Database.Relational.Query (Query, Update, derivedUpdate, desc, placeholder, query, relation,
+                                            relationalQuery', wheres, (!), (.=.), (<-#), (><))
+import           DataSource                (connect)
+import qualified Entity.Health             as E (Healths, healths, id, id', time')
+import           GHC.Int                   (Int64)
+import           Language.SQL.Keyword      (Keyword (LIMIT), word)
 
 deriveJSON defaultOptions ''E.Healths
 
@@ -45,7 +48,7 @@ updateHealthQuery :: Update (TM.LocalTime, Int64)
 updateHealthQuery =
   derivedUpdate $ \proj -> do
     (phTime, ()) <- placeholder (\ph -> E.time' <-# ph)
-    (phId, ()) <- placeholder (\ph -> wheres $ proj ! E.id' HRR..=. ph)
+    (phId, ()) <- placeholder (\ph -> wheres $ proj ! E.id' .=. ph)
     return $ phTime >< phId
 
 currentUtcTime :: IO TM.LocalTime

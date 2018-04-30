@@ -1,14 +1,18 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Model.Book where
+module Model.Book
+  ( getBooks
+  , getBook
+  ) where
 
-import           Data.Aeson.TH
-import           Database.HDBC.Record
-import           Database.Relational.Query as HRR
-import           DataSource
-import qualified Entity.Book               as E
-import           GHC.Int
+import           Data.Aeson.TH             (defaultOptions, deriveJSON)
+import           Database.HDBC.Record      (listToUnique, runQuery)
+import           Database.Relational.Query (Query, asc, placeholder, query, relation, relation', relationalQuery,
+                                            wheres, (!), (.=.))
+import           DataSource                (connect)
+import qualified Entity.Book               as E (Books, books, id', title')
+import           GHC.Int                   (Int64)
 
 deriveJSON defaultOptions ''E.Books
 
