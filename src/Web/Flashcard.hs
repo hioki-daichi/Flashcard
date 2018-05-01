@@ -43,7 +43,7 @@ app = do
     json pages
   where
     setCommonHeader :: ActionCtxT ctx (WebStateM () MySession MyAppState) ()
-    setCommonHeader = setHeader "Access-Control-Allow-Origin" "http://localhost:3000"
+    setCommonHeader = setHeader "Access-Control-Allow-Origin" "http://localhost:4000"
 
 runFlashcard :: IO ()
 runFlashcard = do

@@ -23,7 +23,7 @@
     "eslint-plugin-import": "^2.11.0"
   },
   "scripts": {
-    "dev": "webpack-dev-server --port 3000"
+    "dev": "webpack-dev-server --port 4000"
   },
   "repository": {
     "type": "git",
