@@ -6,8 +6,7 @@ module Model.Health
   ) where
 
 import           Data.Aeson.TH             (defaultOptions, deriveJSON)
-import qualified Data.Time.Clock           as TM (getCurrentTime)
-import qualified Data.Time.LocalTime       as TM (LocalTime, utc, utcToLocalTime)
+import qualified Data.Time.LocalTime       as TM (LocalTime)
 import           Database.HDBC.Record      (runQuery', runUpdate)
 import           Database.HDBC.Session     (withConnectionCommit)
 import           Database.Relational.Query (Query, Update, derivedUpdate, desc, placeholder, query, relation,
@@ -16,6 +15,7 @@ import           DataSource                (connect)
 import qualified Entity.Health             as E (Healths, healths, id, id', time')
 import           GHC.Int                   (Int64)
 import           Language.SQL.Keyword      (Keyword (LIMIT), word)
+import           Util                      (currentUtcTime)
 
 deriveJSON defaultOptions ''E.Healths
 
@@ -50,6 +50,3 @@ updateHealthQuery =
     (phTime, ()) <- placeholder (\ph -> E.time' <-# ph)
     (phId, ()) <- placeholder (\ph -> wheres $ proj ! E.id' .=. ph)
     return $ phTime >< phId
-
-currentUtcTime :: IO TM.LocalTime
-currentUtcTime = TM.utcToLocalTime TM.utc <$> TM.getCurrentTime
