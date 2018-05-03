@@ -14,7 +14,9 @@ import           Web.Spock                 (ActionCtxT, SpockM, Var, WebStateM, 
                                             setStatus, spock, var, (<//>))
 import           Web.Spock.Config          (PoolOrConn (PCNoDatabase), defaultSpockCfg)
 
-app :: SpockM () () () ()
+type Api = SpockM () () () ()
+
+app :: Api
 app = do
   get "ping" $ do
     setCommonHeader
