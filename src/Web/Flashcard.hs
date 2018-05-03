@@ -6,12 +6,12 @@ module Web.Flashcard
 
 import           Control.Monad.IO.Class    (liftIO)
 import           GHC.Int                   (Int64)
-import           Model.Book                (getBook, getBooks)
+import           Model.Book                (getBook, getBooks, postBook)
 import           Model.Health              (touchHealth)
 import           Model.Page                (getPagesByBookId)
 import           Network.HTTP.Types.Status (status404)
-import           Web.Spock                 (SpockAction, SpockM, Var, get, json, prehook, runSpock, setHeader,
-                                            setStatus, spock, var, (<//>))
+import           Web.Spock                 (SpockAction, SpockM, Var, get, json, param', post, prehook, runSpock,
+                                            setHeader, setStatus, spock, var, (<//>))
 import           Web.Spock.Config          (PoolOrConn (PCNoDatabase), defaultSpockCfg)
 
 type Api = SpockM () () () ()
@@ -24,6 +24,12 @@ app =
     get "ping" $ do
       health <- liftIO touchHealth
       json health
+    post "books" $ do
+      userId <- param' "userId"
+      title <- param' "title"
+      _ <- liftIO $ postBook userId title
+      books <- liftIO getBooks
+      json books
     get "books" $ do
       books <- liftIO getBooks
       json books

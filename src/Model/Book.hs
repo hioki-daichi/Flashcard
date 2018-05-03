@@ -1,18 +1,25 @@
-{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE TemplateHaskell       #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Model.Book
   ( getBooks
   , getBook
+  , postBook
   ) where
 
 import           Data.Aeson.TH             (defaultOptions, deriveJSON)
-import           Database.HDBC.Record      (listToUnique, runQuery)
-import           Database.Relational.Query (Query, asc, placeholder, query, relation, relation', relationalQuery,
-                                            wheres, (!), (.=.))
+import           Data.Time.LocalTime       (LocalTime)
+import           Database.HDBC.Record      (listToUnique, runInsert, runQuery)
+import           Database.HDBC.Session     (withConnectionCommit)
+import           Database.Relational.Query (Insert, Query, asc, derivedInsertValue, placeholder, query, relation,
+                                            relation', relationalQuery, unitPlaceHolder, value, wheres, (!), (.=.),
+                                            (<-#))
 import           DataSource                (connect)
-import qualified Entity.Book               as E (Books, books, id', title')
+import qualified Entity.Book               as E (Books, books, createdAt', id', title', updatedAt', userId')
 import           GHC.Int                   (Int64)
+import           Util                      (currentUtcTime)
 
 deriveJSON defaultOptions ''E.Books
 
@@ -39,3 +46,18 @@ getBookQuery =
     b <- query E.books
     wheres $ b ! E.id' .=. ph
     return b
+
+postBook :: Int64 -> String -> IO Integer
+postBook userId title =
+  withConnectionCommit connect $ \conn -> do
+    utcTime <- currentUtcTime
+    runInsert conn (postBookQuery userId title utcTime) ()
+
+postBookQuery :: Int64 -> String -> LocalTime -> Insert ()
+postBookQuery userId title time =
+  derivedInsertValue $ do
+    E.userId' <-# value userId
+    E.title' <-# value title
+    E.createdAt' <-# value time
+    E.updatedAt' <-# value time
+    return unitPlaceHolder
