@@ -10,8 +10,8 @@ import           Model.Book                (getBook, getBooks)
 import           Model.Health              (touchHealth)
 import           Model.Page                (getPagesByBookId)
 import           Network.HTTP.Types.Status (status404)
-import           Web.Spock                 (ActionCtxT, SpockM, Var, WebStateM, get, json, runSpock, setHeader,
-                                            setStatus, spock, var, (<//>))
+import           Web.Spock                 (SpockAction, SpockM, Var, get, json, runSpock, setHeader, setStatus, spock,
+                                            var, (<//>))
 import           Web.Spock.Config          (PoolOrConn (PCNoDatabase), defaultSpockCfg)
 
 type Api = SpockM () () () ()
@@ -37,7 +37,7 @@ app = do
     pages <- liftIO $ getPagesByBookId bookId
     json pages
   where
-    setCommonHeader :: ActionCtxT ctx (WebStateM () () ()) ()
+    setCommonHeader :: SpockAction () () () ()
     setCommonHeader = setHeader "Access-Control-Allow-Origin" "http://localhost:4000"
 
 runFlashcard :: IO ()
