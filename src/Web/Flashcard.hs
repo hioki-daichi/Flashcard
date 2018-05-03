@@ -5,7 +5,6 @@ module Web.Flashcard
   ) where
 
 import           Control.Monad.IO.Class    (liftIO)
-import           Data.IORef                (IORef, newIORef)
 import           GHC.Int                   (Int64)
 import           Model.Book                (getBook, getBooks)
 import           Model.Health              (touchHealth)
@@ -15,10 +14,7 @@ import           Web.Spock                 (ActionCtxT, SpockM, Var, WebStateM, 
                                             setStatus, spock, var, (<//>))
 import           Web.Spock.Config          (PoolOrConn (PCNoDatabase), defaultSpockCfg)
 
-newtype MyAppState =
-  DummyAppState (IORef Int)
-
-app :: SpockM () () MyAppState ()
+app :: SpockM () () () ()
 app = do
   get "ping" $ do
     setCommonHeader
@@ -39,11 +35,10 @@ app = do
     pages <- liftIO $ getPagesByBookId bookId
     json pages
   where
-    setCommonHeader :: ActionCtxT ctx (WebStateM () () MyAppState) ()
+    setCommonHeader :: ActionCtxT ctx (WebStateM () () ()) ()
     setCommonHeader = setHeader "Access-Control-Allow-Origin" "http://localhost:4000"
 
 runFlashcard :: IO ()
 runFlashcard = do
-  ref <- newIORef 0
-  cfg <- defaultSpockCfg () PCNoDatabase (DummyAppState ref)
+  cfg <- defaultSpockCfg () PCNoDatabase ()
   runSpock 8080 (spock cfg app)
