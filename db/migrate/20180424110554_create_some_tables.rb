@@ -11,6 +11,8 @@ class CreateSomeTables < ActiveRecord::Migration[5.2]
       t.string :title,    index: false, null: false
 
       t.timestamps index: false, null: false
+
+      t.index [:user_id, :title], unique: true
     end
 
     create_table :pages do |t|

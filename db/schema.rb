@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2018_04_24_110554) do
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "title"], name: "index_books_on_user_id_and_title", unique: true
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
