@@ -15,13 +15,10 @@ import           Web.Spock                 (ActionCtxT, SpockM, Var, WebStateM, 
                                             setStatus, spock, var, (<//>))
 import           Web.Spock.Config          (PoolOrConn (PCNoDatabase), defaultSpockCfg)
 
-data MySession =
-  EmptySession
-
 newtype MyAppState =
   DummyAppState (IORef Int)
 
-app :: SpockM () MySession MyAppState ()
+app :: SpockM () () MyAppState ()
 app = do
   get "ping" $ do
     setCommonHeader
@@ -42,11 +39,11 @@ app = do
     pages <- liftIO $ getPagesByBookId bookId
     json pages
   where
-    setCommonHeader :: ActionCtxT ctx (WebStateM () MySession MyAppState) ()
+    setCommonHeader :: ActionCtxT ctx (WebStateM () () MyAppState) ()
     setCommonHeader = setHeader "Access-Control-Allow-Origin" "http://localhost:4000"
 
 runFlashcard :: IO ()
 runFlashcard = do
   ref <- newIORef 0
-  cfg <- defaultSpockCfg EmptySession PCNoDatabase (DummyAppState ref)
+  cfg <- defaultSpockCfg () PCNoDatabase (DummyAppState ref)
   runSpock 8080 (spock cfg app)
