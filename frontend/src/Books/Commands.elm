@@ -1,4 +1,4 @@
-module Books.Commands exposing (fetchBooks, fetchPagesByBookId)
+module Books.Commands exposing (fetchBooks, fetchPagesByBookId, postBook)
 
 import Http
 import Json.Decode
@@ -17,6 +17,18 @@ fetchPagesByBookId : Int -> Cmd Msg
 fetchPagesByBookId bookId =
     Http.get (baseUrl ++ "/books/" ++ toString bookId ++ "/pages") pagesDecoder
         |> Http.send OnFetchPages
+
+
+postBook : Int -> String -> Cmd Msg
+postBook userId title =
+    let
+        body =
+            Http.stringBody "application/x-www-form-urlencoded" ("userId=" ++ toString userId ++ "&title=" ++ title)
+
+        request =
+            Http.post (baseUrl ++ "/books") body booksDecoder
+    in
+        Http.send OnCreateBook request
 
 
 booksDecoder : Json.Decode.Decoder (List Book)

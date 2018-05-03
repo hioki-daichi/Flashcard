@@ -1,9 +1,14 @@
-module Books.Models exposing (Book, Page)
+module Books.Models exposing (Book, NewBook, Page)
 
 
 type alias Book =
     { id : Int
     , title : String
+    }
+
+
+type alias NewBook =
+    { title : String
     }
 
 

@@ -9,3 +9,6 @@ type Msg
     | OnFetchBooks (Result Http.Error (List Book))
     | ShowBook Int
     | OnFetchPages (Result Http.Error (List Page))
+    | NewBookTitle String
+    | CreateBook
+    | OnCreateBook (Result Http.Error (List Book))
