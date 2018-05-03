@@ -34,3 +34,29 @@ update msg model =
                     Debug.log "error" err
             in
                 ( model, Cmd.none )
+
+        CreateBook ->
+            ( model, Books.Commands.postBook 1 model.newBook.title )
+
+        OnCreateBook (Ok books) ->
+            ( { model | books = books }, Cmd.none )
+
+        OnCreateBook (Err err) ->
+            let
+                _ =
+                    Debug.log "error" err
+            in
+                ( model, Cmd.none )
+
+        NewBookTitle newTitle ->
+            let
+                newBook =
+                    model.newBook
+
+                updatedNewBook =
+                    { newBook | title = newTitle }
+
+                updatedModel =
+                    { model | newBook = updatedNewBook }
+            in
+                ( updatedModel, Cmd.none )
