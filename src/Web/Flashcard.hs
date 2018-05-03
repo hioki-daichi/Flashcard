@@ -16,6 +16,8 @@ import           Web.Spock.Config          (PoolOrConn (PCNoDatabase), defaultSp
 
 type Api = SpockM () () () ()
 
+type ApiAction a = SpockAction () () () a
+
 app :: Api
 app = do
   get "ping" $ do
@@ -37,7 +39,7 @@ app = do
     pages <- liftIO $ getPagesByBookId bookId
     json pages
   where
-    setCommonHeader :: SpockAction () () () ()
+    setCommonHeader :: ApiAction ()
     setCommonHeader = setHeader "Access-Control-Allow-Origin" "http://localhost:4000"
 
 runFlashcard :: IO ()
