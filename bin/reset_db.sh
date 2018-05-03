@@ -1,3 +1,3 @@
 #!/bin/sh
 
-bundle exec rake db:drop db:setup db:migrate db:seed
+bundle exec rake db:drop db:create db:migrate db:seed
