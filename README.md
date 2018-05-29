@@ -15,4 +15,4 @@ nf start
 
 # Demo
 
-![](https://raw.githubusercontent.com/wiki/hioki-daichi/flashcard/demo.gif)
+![](https://raw.githubusercontent.com/wiki/hioki-daichi/flashcard-haskell-elm/demo.gif)
