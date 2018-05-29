@@ -12,3 +12,7 @@ cd ./flashcard/
 ./bin/reset.sh
 nf start
 ```
+
+# Demo
+
+![](https://raw.githubusercontent.com/wiki/hioki-daichi/flashcard/demo.gif)
